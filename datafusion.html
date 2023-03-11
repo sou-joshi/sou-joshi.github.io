@@ -108,11 +108,11 @@
                 <h4>Install PyArrow and DataFusion in your environment</h4>
                 
                 <code>pip install pyarrow<br>
-                      pip install datafusion</code>
+                       pip install datafusion</code>
 
                 <h4>Import the required libraries in your PySpark script</h4>
                 <code>from pyspark.sql.functions import col<br>
-                    from datafusion import ExecutionContext, CsvReadOptions, CsvDataSourceOptions</code>
+                       from datafusion import ExecutionContext, CsvReadOptions, CsvDataSourceOptions</code>
                 
                 <h4>Create a DataFusion context</h4>
                 <code>context = ExecutionContext()</code>
@@ -120,15 +120,15 @@
                 <h4>Register a data source</h4>
                 <p>You can register a CSV data source using the following code</p>
                 <code>options = CsvDataSourceOptions(skip_rows=1, delimiter=",", has_header=True)<br>
-                      data_source = context \<br>
-                      .read_csv("path/to/data.csv", CsvReadOptions(options=options)) \<br>
-                      .register_temp_table("my_table")</code>
+                       data_source = context \<br>
+                       .read_csv("path/to/data.csv", CsvReadOptions(options=options)) \<br>
+                       .register_temp_table("my_table")</code>
                 <h4>Create a PySpark DataFrame from the registered DataFusion table</h4>
                 <code>df = spark.table("my_table")</code>
                 
                 <h4>Use PySpark to query the DataFrame as needed</h4>
                 <code>result = df.select(col("column1"), col("column2")).where(col("column3") > 10)<br>
-                      result.show()</code>
+                       result.show()</code>
                 
                 <p>By using PyArrow and DataFusion in PySpark, you can easily query data from various sources and benefit from the performance advantages provided by Apache Arrow's efficient in-memory representation and DataFusion's query engine.</p>
 
