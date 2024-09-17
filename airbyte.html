@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <!-- Basic page needs -->
+    <meta charset="utf-8">
+    <title>Airbyte - Introduction</title>
+    <meta name="description" content="airbyte">
+    <meta name="author" content="Sourabh Joshi">
+    <!-- Mobile specific metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Scripts -->
+    <script src="js/modernizr.js"></script>
+    <script src="js/pace.min.js"></script>
+</head>
+
+<body id="top">
+
+    <!-- Header -->
+    <header class="s-header">
+        <nav class="header-nav-wrap">
+            <ul class="header-nav">
+                <li class="current"><a href="index.html#home" title="home">Home</a></li>
+                <li><a href="index.html#about" title="about">AboutMe</a></li>
+                <li><a href="index.html#works" title="works">Works</a></li>
+                <li><a class="current" href="blog.html" title="blog">Blog-Moolaa</a></li>
+                <li><a href="index.html#contact" title="contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <a class="header-menu-toggle" href="#0"><span>Menu</span></a>
+
+    </header> <!-- end s-header -->
+
+    <article class="blog-single">
+
+        <!-- Page header/blog hero -->
+        <div class="page-header page-header--single page-hero" style="background-image:url(images/blog/airbyte-header.jpeg)">
+
+            <div class="row page-header__content narrow">
+                <article class="col-full">
+                    <div class="page-header__info">
+                        <div class="page-header__cat">
+                            <a href="#0">Airbyte</a>
+                        </div>
+                    </div>
+                    <h1 class="page-header__title">
+                        Airbyte - Open-Source Data Integration
+                    </h1>
+                    <ul class="page-header__meta">
+                        <li class="date">Sep 17, 2024</li>
+                        <li class="author">
+                            By <span>Sourabh Joshi</span>
+                        </li>
+                    </ul>
+
+                </article>
+            </div>
+        </div>
+
+        <div class="row blog-content">
+            <div class="col-full blog-content__main">
+
+                <p class="lead">
+                    This article introduces Airbyte, an open-source data integration platform, and provides examples of how to use it in your data engineering workflows.
+                </p>
+
+                <h1>What is Airbyte?</h1>
+                <p>Airbyte is an open-source data integration tool that helps you consolidate data from various sources into destinations like data warehouses, lakes, and databases. With a growing catalog of connectors, Airbyte enables you to synchronize data from APIs, databases, and files seamlessly.</p>
+
+                <h2>Key Features</h2>
+                <ul>
+                    <li><strong>Extensive Connector Catalog:</strong> Over 150 connectors for data sources and destinations.</li>
+                    <li><strong>Custom Connector Development:</strong> Build and deploy your connectors with ease.</li>
+                    <li><strong>Incremental Data Updates:</strong> Efficiently sync only new or updated data.</li>
+                    <li><strong>Community-Driven:</strong> Active community contributing to connector development and platform improvements.</li>
+                </ul>
+
+                <h2>Getting Started with Airbyte</h2>
+                <p>To start using Airbyte, you can deploy it locally using Docker:</p>
+                <pre><code class="language-bash"># Pull the latest Airbyte Docker images
+docker-compose pull
+
+# Start Airbyte
+docker-compose up</code></pre>
+
+                <p>Once Airbyte is running, access the web UI at <a href="http://localhost:8000" target="_blank">http://localhost:8000</a>.</p>
+
+                <h2>Example: Syncing Data from PostgreSQL to Snowflake</h2>
+                <p>Let's walk through an example of syncing data from a PostgreSQL database to Snowflake.</p>
+
+                <h3>1. Set Up the Source (PostgreSQL)</h3>
+                <p>In the Airbyte UI, add a new source:</p>
+                <ul>
+                    <li>Select <strong>PostgreSQL</strong> as the source type.</li>
+                    <li>Enter the connection details for your PostgreSQL database.</li>
+                </ul>
+
+                <h3>2. Set Up the Destination (Snowflake)</h3>
+                <p>Add a new destination:</p>
+                <ul>
+                    <li>Select <strong>Snowflake</strong> as the destination type.</li>
+                    <li>Enter your Snowflake account details.</li>
+                </ul>
+
+                <h3>3. Create a Connection</h3>
+                <p>Now, create a connection between the source and destination:</p>
+                <ul>
+                    <li>Select the tables you want to sync.</li>
+                    <li>Choose the sync frequency (e.g., every hour).</li>
+                    <li>Select the sync mode (e.g., incremental append).</li>
+                </ul>
+
+                <h3>4. Run the Sync</h3>
+                <p>Trigger the sync manually or wait for the scheduled time. Monitor the progress in the Airbyte UI.</p>
+
+                <img src="images/blog/airbyte-sync.png" alt="Airbyte Sync Process" align="middle" width="1000" height="600">
+
+                <h2>Benefits of Using Airbyte</h2>
+                <ul>
+                    <li><strong>Flexibility:</strong> Easy to add new connectors as per your needs.</li>
+                    <li><strong>Transparency:</strong> Open-source platform with active community support.</li>
+                    <li><strong>Cost-Effective:</strong> Avoid vendor lock-in and reduce integration costs.</li>
+                    <li><strong>Customization:</strong> Modify connectors and platform behavior to suit your requirements.</li>
+                </ul>
+
+                <p>By integrating Airbyte into your data engineering workflows, you can streamline data consolidation and focus on deriving insights from your data.</p>
+
+                <p style="font-family: 'Courier New', monospace;font-size: 50px;">LEARN, SHARE AND GROW</p>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row footer-bottom">
+
+            <div class="col-twelve">
+                <div class="copyright">
+                    <span>© Copyright Hola 2024</span>
+                    <span>Design by <a href="https://www.styleshout.com/">styleshout</a></span>
+                </div>
+
+                <div class="go-top">
+                    <a class="smoothscroll" title="Back to Top" href="#top"><i class="im im-arrow-up"
+                            aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+        </div> <!-- end footer-bottom -->
+
+    </footer> <!-- end footer -->
+
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
+
+    <!-- Java Script -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>
