@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <!-- Basic page needs -->
+    <meta charset="utf-8">
+    <title>Amundsen - Data Discovery and Metadata Engine</title>
+    <meta name="description" content="amundsen">
+    <meta name="author" content="Sourabh Joshi">
+    <!-- Mobile specific metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Scripts -->
+    <script src="js/modernizr.js"></script>
+    <script src="js/pace.min.js"></script>
+</head>
+
+<body id="top">
+
+    <!-- Header -->
+    <header class="s-header">
+        <nav class="header-nav-wrap">
+            <ul class="header-nav">
+                <li class="current"><a href="index.html#home" title="home">Home</a></li>
+                <li><a href="index.html#about" title="about">AboutMe</a></li>
+                <li><a href="index.html#works" title="works">Works</a></li>
+                <li><a class="current" href="blog.html" title="blog">Blog-Moolaa</a></li>
+                <li><a href="index.html#contact" title="contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <a class="header-menu-toggle" href="#0"><span>Menu</span></a>
+
+    </header> <!-- end s-header -->
+
+    <article class="blog-single">
+
+        <!-- Page header/blog hero -->
+        <div class="page-header page-header--single page-hero" style="background-image:url(images/blog/amundsen-header.jpeg)">
+
+            <div class="row page-header__content narrow">
+                <article class="col-full">
+                    <div class="page-header__info">
+                        <div class="page-header__cat">
+                            <a href="#0">Amundsen</a>
+                        </div>
+                    </div>
+                    <h1 class="page-header__title">
+                        Amundsen - Data Discovery and Metadata Engine
+                    </h1>
+                    <ul class="page-header__meta">
+                        <li class="date">Sep 17, 2024</li>
+                        <li class="author">
+                            By <span>Sourabh Joshi</span>
+                        </li>
+                    </ul>
+
+                </article>
+            </div>
+        </div>
+
+        <div class="row blog-content">
+            <div class="col-full blog-content__main">
+
+                <p class="lead">
+                    This article provides an in-depth look at Amundsen, an open-source data discovery and metadata engine, including how to set it up and examples of using it to enhance data exploration in your organization.
+                </p>
+
+                <h1>What is Amundsen?</h1>
+                <p>Amundsen is an open-source data discovery and metadata platform originally developed by Lyft. Named after the Norwegian explorer Roald Amundsen, it's designed to improve the productivity of data analysts, scientists, and engineers when navigating their data ecosystem. Amundsen achieves this by indexing data resources (tables, dashboards, streams, etc.) and making them easily discoverable through a powerful search interface.</p>
+
+                <h2>Key Features</h2>
+                <ul>
+                    <li><strong>Metadata Search:</strong> Provides a search interface to find data assets across your organization.</li>
+                    <li><strong>Data Lineage:</strong> Displays how data flows between different systems and transformations.</li>
+                    <li><strong>Column-Level Metadata:</strong> Offers detailed information about table columns, including data types and descriptions.</li>
+                    <li><strong>User Collaboration:</strong> Allows users to annotate datasets, add documentation, and see frequent users.</li>
+                    <li><strong>Integration:</strong> Connects with various databases, data warehouses, and BI tools.</li>
+                </ul>
+
+                <h2>Architecture Overview</h2>
+                <p>Amundsen's architecture consists of several microservices:</p>
+                <ul>
+                    <li><strong>Frontend Service:</strong> The web application that users interact with.</li>
+                    <li><strong>Metadata Service:</strong> Stores and serves metadata about data assets.</li>
+                    <li><strong>Search Service:</strong> Handles indexing and searching of metadata.</li>
+                    <li><strong>Neo4j or Atlas:</strong> Used as a graph database to store relationships between data assets.</li>
+                    <li><strong>Elasticsearch:</strong> Used for indexing metadata to enable fast search capabilities.</li>
+                </ul>
+
+                <!-- Include Amundsen architecture image -->
+                <img src="images/blog/amundsen-architecture.png" alt="Amundsen Architecture Diagram" align="middle" width="1000" height="600">
+
+                <h2>Setting Up Amundsen</h2>
+                <p>Let's walk through setting up Amundsen locally using Docker. This will allow you to explore its features and understand how it can benefit your organization.</p>
+
+                <h3>1. Prerequisites</h3>
+                <p>Ensure you have the following installed on your machine:</p>
+                <ul>
+                    <li>Docker</li>
+                    <li>Docker Compose</li>
+                </ul>
+
+                <h3>2. Clone the Amundsen Repository</h3>
+                <pre><code class="language-bash">git clone https://github.com/amundsen-io/amundsen.git
+cd amundsen</code></pre>
+
+                <h3>3. Start the Services</h3>
+                <p>Navigate to the docker-compose directory and start the services:</p>
+                <pre><code class="language-bash">cd amundsenfrontendlibrary
+docker-compose -f docker-amundsen.yml up</code></pre>
+
+                <p>This command starts all the necessary services, including the frontend, metadata, and search services, as well as Neo4j and Elasticsearch.</p>
+
+                <h3>4. Access the Amundsen UI</h3>
+                <p>Once the services are running, access the Amundsen UI at <a href="http://localhost:5000" target="_blank">http://localhost:5000</a>.</p>
+
+                <!-- Include Amundsen UI image -->
+                <img src="images/blog/amundsen-ui.png" alt="Amundsen User Interface" align="middle" width="1000" height="600">
+
+                <h2>Ingesting Metadata</h2>
+                <p>To populate Amundsen with metadata from your data sources, you can use databuilder, which is Amundsen's data ingestion library.</p>
+
+                <h3>Example: Ingesting Sample Data</h3>
+                <p>Let's ingest some sample data into Amundsen.</p>
+
+                <h4>1. Install Dependencies</h4>
+                <pre><code class="language-bash">pip install --upgrade pip
+pip install virtualenv
+virtualenv venv
+source venv/bin/activate
+pip install -e databuilder/</code></pre>
+
+                <h4>2. Run the Sample Data Loader</h4>
+                <p>Execute the sample data loader script:</p>
+                <pre><code class="language-bash">python examples/sample_data_loader.py</code></pre>
+
+                <p>This script loads sample metadata into Neo4j and Elasticsearch.</p>
+
+                <h3>Exploring Data in Amundsen</h3>
+                <p>Refresh the Amundsen UI, and you should see the sample data available for search and exploration.</p>
+
+                <!-- Include Amundsen search image -->
+                <img src="images/blog/amundsen-search.png" alt="Amundsen Search Interface" align="middle" width="1000" height="600">
+
+                <h2>Using Amundsen in Your Organization</h2>
+                <p>Amundsen can connect to various data sources to ingest metadata. Here's an example of how to configure Amundsen to ingest metadata from a Hive data warehouse.</p>
+
+                <h3>1. Configure the Hive Extractor</h3>
+                <p>Create a configuration file for the Hive metadata extractor:</p>
+                <pre><code class="language-python">from pyhocon import ConfigFactory
+from databuilder.extractor.hive_table_metadata_extractor import HiveTableMetadataExtractor
+
+hive_extractor = HiveTableMetadataExtractor()
+hive_extractor.init(
+    conf=ConfigFactory.from_dict({
+        'extractor.hive_table_metadata.partitioned_tables': True,
+        'extractor.hive_table_metadata.cluster_source': 'my_cluster',
+        'extractor.hive_table_metadata.database': 'my_database',
+        # Additional configurations...
+    })
+)</code></pre>
+
+                <h3>2. Run the Ingestion Job</h3>
+                <p>Set up and run a job to ingest the metadata:</p>
+                <pre><code class="language-python">from databuilder.job.job import DefaultJob
+from databuilder.publisher.neo4j_csv_publisher import Neo4jCsvPublisher
+
+job = DefaultJob(
+    conf=ConfigFactory.from_dict({
+        'extractor.hive_table_metadata.extractor': hive_extractor,
+        'publisher.neo4j_csv_publisher': Neo4jCsvPublisher(),
+        # Additional configurations...
+    })
+)
+
+job.launch()</code></pre>
+
+                <p>After running the job, the metadata from your Hive warehouse will be available in Amundsen for discovery.</p>
+
+                <h2>Benefits of Using Amundsen</h2>
+                <ul>
+                    <li><strong>Improved Data Discovery:</strong> Makes it easy for users to find and understand data assets.</li>
+                    <li><strong>Enhanced Collaboration:</strong> Users can share knowledge through annotations and documentation.</li>
+                    <li><strong>Data Lineage and Compliance:</strong> Understand data flow and dependencies for better governance.</li>
+                    <li><strong>Integration Friendly:</strong> Connects with various data sources and tools in your data ecosystem.</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+                <p>Amundsen serves as a central hub for data discovery and metadata management in an organization. By providing a user-friendly interface and robust integration capabilities, it helps data professionals navigate complex data landscapes efficiently.</p>
+
+                <p>If you're looking to enhance data discovery and promote a data-driven culture in your organization, Amundsen is a powerful tool to consider.</p>
+
+                <p style="font-family: 'Courier New', monospace;font-size: 50px;">LEARN, SHARE AND GROW</p>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row footer-bottom">
+
+            <div class="col-twelve">
+                <div class="copyright">
+                    <span>© Copyright Hola 2024</span>
+                    <span>Design by <a href="https://www.styleshout.com/">styleshout</a></span>
+                </div>
+
+                <div class="go-top">
+                    <a class="smoothscroll" title="Back to Top" href="#top"><i class="im im-arrow-up"
+                            aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+        </div> <!-- end footer-bottom -->
+
+    </footer> <!-- end footer -->
+
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
+
+    <!-- Java Script -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>
