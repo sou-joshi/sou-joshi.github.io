@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <!-- Basic page needs -->
+    <meta charset="utf-8">
+    <title>Kedro - Workflow Development Tool</title>
+    <meta name="description" content="kedro">
+    <meta name="author" content="Sourabh Joshi">
+    <!-- Mobile specific metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Scripts -->
+    <script src="js/modernizr.js"></script>
+    <script src="js/pace.min.js"></script>
+</head>
+
+<body id="top">
+
+    <!-- Header -->
+    <header class="s-header">
+        <nav class="header-nav-wrap">
+            <ul class="header-nav">
+                <li class="current"><a href="index.html#home" title="home">Home</a></li>
+                <li><a href="index.html#about" title="about">AboutMe</a></li>
+                <li><a href="index.html#works" title="works">Works</a></li>
+                <li><a class="current" href="blog.html" title="blog">Blog-Moolaa</a></li>
+                <li><a href="index.html#contact" title="contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <a class="header-menu-toggle" href="#0"><span>Menu</span></a>
+
+    </header> <!-- end s-header -->
+
+    <article class="blog-single">
+
+        <!-- Page header/blog hero -->
+        <div class="page-header page-header--single page-hero" style="background-image:url(images/blog/kedro-header.jpeg)">
+
+            <div class="row page-header__content narrow">
+                <article class="col-full">
+                    <div class="page-header__info">
+                        <div class="page-header__cat">
+                            <a href="#0">Kedro</a>
+                        </div>
+                    </div>
+                    <h1 class="page-header__title">
+                        Kedro - Workflow Development Tool
+                    </h1>
+                    <ul class="page-header__meta">
+                        <li class="date">Sep 17, 2024</li>
+                        <li class="author">
+                            By <span>Sourabh Joshi</span>
+                        </li>
+                    </ul>
+
+                </article>
+            </div>
+        </div>
+
+        <div class="row blog-content">
+            <div class="col-full blog-content__main">
+
+                <p class="lead">
+                    This article provides an in-depth look at Kedro, an open-source workflow development tool, including how to set it up and examples of using it to build robust data pipelines.
+                </p>
+
+                <h1>What is Kedro?</h1>
+                <p>Kedro is an open-source Python framework that helps you build reproducible, maintainable, and modular data science code. Developed by QuantumBlack, a McKinsey company, Kedro brings software engineering best practices to data science, enabling teams to create robust data pipelines with ease.</p>
+
+                <h2>Key Features</h2>
+                <ul>
+                    <li><strong>Project Templates:</strong> Provides standardized project structures for consistency.</li>
+                    <li><strong>Data Catalog:</strong> Manages data inputs and outputs in a centralized and configurable way.</li>
+                    <li><strong>Pipeline Abstraction:</strong> Allows you to define data pipelines with clear dependencies and modular components.</li>
+                    <li><strong>Modularity and Reusability:</strong> Encourages writing reusable and testable code components.</li>
+                    <li><strong>Visualization:</strong> Offers pipeline visualization to understand data flow.</li>
+                </ul>
+
+                <h2>Architecture Overview</h2>
+                <p>Kedro's architecture is designed to enforce separation of concerns and improve code quality:</p>
+                <ul>
+                    <li><strong>Nodes:</strong> The basic units of work, representing functions that process data.</li>
+                    <li><strong>Pipelines:</strong> Directed acyclic graphs (DAGs) that connect nodes and define the data flow.</li>
+                    <li><strong>Data Catalog:</strong> Configuration of all data sources and sinks used in the pipelines.</li>
+                    <li><strong>Configuration:</strong> Centralized settings for parameters and environment-specific variables.</li>
+                </ul>
+
+                <!-- Include Kedro architecture image -->
+                <img src="images/blog/kedro-architecture.png" alt="Kedro Architecture Diagram" align="middle" width="1000" height="600">
+
+                <h2>Setting Up Kedro</h2>
+                <p>Let's walk through setting up Kedro and creating a simple data pipeline.</p>
+
+                <h3>1. Install Kedro</h3>
+                <p>Install Kedro using pip:</p>
+                <pre><code class="language-bash">pip install kedro</code></pre>
+
+                <h3>2. Create a New Kedro Project</h3>
+                <p>Initialize a new project using the Kedro CLI:</p>
+                <pre><code class="language-bash">kedro new</code></pre>
+                <p>You'll be prompted to enter details like project name, repository name, and Python package name. Kedro then creates a project with a standardized directory structure.</p>
+
+                <h3>3. Understand the Project Structure</h3>
+                <p>The generated project structure includes:</p>
+                <ul>
+                    <li><strong>src/</strong>: Contains all source code.</li>
+                    <li><strong>data/</strong>: Placeholder directories for raw, intermediate, and processed data.</li>
+                    <li><strong>conf/</strong>: Configuration files for different environments.</li>
+                    <li><strong>logs/</strong>: Directory for log files.</li>
+                </ul>
+
+                <!-- Include Kedro project structure image -->
+                <img src="images/blog/kedro-project-structure.png" alt="Kedro Project Structure" align="middle" width="1000" height="600">
+
+                <h2>Building a Data Pipeline</h2>
+                <p>Let's create a simple pipeline that processes some data.</p>
+
+                <h3>1. Define Nodes</h3>
+                <p>Create functions that will serve as nodes in your pipeline.</p>
+                <pre><code class="language-python"># src/<your_package_name>/nodes.py
+
+def load_data():
+    import pandas as pd
+    data = pd.read_csv('data/raw/data.csv')
+    return data
+
+def process_data(data):
+    # Perform some data processing
+    data['processed_column'] = data['raw_column'] * 2
+    return data
+
+def save_data(data):
+    data.to_csv('data/processed/processed_data.csv', index=False)</code></pre>
+
+                <h3>2. Create the Pipeline</h3>
+                <p>Define the pipeline in the <code>pipeline.py</code> file.</p>
+                <pre><code class="language-python"># src/<your_package_name>/pipeline.py
+
+from kedro.pipeline import node, Pipeline
+from .nodes import load_data, process_data, save_data
+
+def create_pipeline(**kwargs):
+    return Pipeline(
+        [
+            node(load_data, inputs=None, outputs='raw_data', name='load_data_node'),
+            node(process_data, inputs='raw_data', outputs='processed_data', name='process_data_node'),
+            node(save_data, inputs='processed_data', outputs=None, name='save_data_node'),
+        ]
+    )</code></pre>
+
+                <h3>3. Configure the Data Catalog</h3>
+                <p>Define data sources and sinks in the <code>catalog.yml</code> file.</p>
+                <pre><code class="language-yaml"># conf/base/catalog.yml
+
+raw_data:
+  type: pandas.CSVDataSet
+  filepath: data/raw/data.csv
+
+processed_data:
+  type: pandas.CSVDataSet
+  filepath: data/processed/processed_data.csv</code></pre>
+
+                <h3>4. Run the Pipeline</h3>
+                <p>Execute the pipeline using the Kedro CLI:</p>
+                <pre><code class="language-bash">kedro run</code></pre>
+
+                <p>Kedro will process the data according to the pipeline definition, managing data inputs and outputs as specified in the catalog.</p>
+
+                <h3>5. Visualize the Pipeline</h3>
+                <p>Use Kedro-Viz to visualize your pipeline:</p>
+                <pre><code class="language-bash">kedro viz</code></pre>
+
+                <!-- Include Kedro pipeline visualization image -->
+                <img src="images/blog/kedro-pipeline-viz.png" alt="Kedro Pipeline Visualization" align="middle" width="1000" height="600">
+
+                <h2>Benefits of Using Kedro</h2>
+                <ul>
+                    <li><strong>Reproducibility:</strong> Standardized project templates and configuration management ensure consistent results.</li>
+                    <li><strong>Maintainability:</strong> Modular code structure makes it easier to maintain and update pipelines.</li>
+                    <li><strong>Collaboration:</strong> Clear project structure facilitates teamwork and code reviews.</li>
+                    <li><strong>Scalability:</strong> Pipelines can be scaled and extended as project requirements grow.</li>
+                    <li><strong>Integration:</strong> Works well with other data engineering tools and platforms.</li>
+                </ul>
+
+                <h2>Advanced Features</h2>
+                <p>Kedro offers advanced features for more complex workflows:</p>
+                <ul>
+                    <li><strong>Parameterization:</strong> Use configuration files to manage parameters for different environments.</li>
+                    <li><strong>Parallelism:</strong> Execute nodes in parallel where dependencies allow.</li>
+                    <li><strong>Plugins:</strong> Extend Kedro's functionality with plugins for Azure, Airflow, and more.</li>
+                    <li><strong>Testing:</strong> Facilitate unit and integration testing of nodes and pipelines.</li>
+                </ul>
+
+                <h2>Conclusion</h2>
+                <p>Kedro brings software engineering rigor to data science and data engineering projects. By enforcing best practices, it helps teams build robust, maintainable, and scalable data pipelines. Whether you're working on a small project or a large enterprise system, Kedro can enhance productivity and code quality.</p>
+
+                <p>If you're looking to improve the structure and reliability of your data pipelines, Kedro is a valuable tool to incorporate into your workflow.</p>
+
+                <p style="font-family: 'Courier New', monospace;font-size: 50px;">LEARN, SHARE AND GROW</p>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row footer-bottom">
+
+            <div class="col-twelve">
+                <div class="copyright">
+                    <span>© Copyright Hola 2024</span>
+                    <span>Design by <a href="https://www.styleshout.com/">styleshout</a></span>
+                </div>
+
+                <div class="go-top">
+                    <a class="smoothscroll" title="Back to Top" href="#top"><i class="im im-arrow-up"
+                            aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+        </div> <!-- end footer-bottom -->
+
+    </footer> <!-- end footer -->
+
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
+
+    <!-- Java Script -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>
