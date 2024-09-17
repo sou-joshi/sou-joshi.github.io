@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <!-- Basic page needs -->
+    <meta charset="utf-8">
+    <title>Great Expectations - Introduction</title>
+    <meta name="description" content="great expectations">
+    <meta name="author" content="Sourabh Joshi">
+    <!-- Mobile specific metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Scripts -->
+    <script src="js/modernizr.js"></script>
+    <script src="js/pace.min.js"></script>
+</head>
+
+<body id="top">
+
+    <!-- Header -->
+    <header class="s-header">
+        <nav class="header-nav-wrap">
+            <ul class="header-nav">
+                <li class="current"><a href="index.html#home" title="home">Home</a></li>
+                <li><a href="index.html#about" title="about">AboutMe</a></li>
+                <li><a href="index.html#works" title="works">Works</a></li>
+                <li><a class="current" href="blog.html" title="blog">Blog-Moolaa</a></li>
+                <li><a href="index.html#contact" title="contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <a class="header-menu-toggle" href="#0"><span>Menu</span></a>
+
+    </header> <!-- end s-header -->
+
+    <article class="blog-single">
+
+        <!-- Page header/blog hero -->
+        <div class="page-header page-header--single page-hero" style="background-image:url(images/blog/great-expectations-header.jpeg)">
+
+            <div class="row page-header__content narrow">
+                <article class="col-full">
+                    <div class="page-header__info">
+                        <div class="page-header__cat">
+                            <a href="#0">Great Expectations</a>
+                        </div>
+                    </div>
+                    <h1 class="page-header__title">
+                        Great Expectations - Data Validation Framework
+                    </h1>
+                    <ul class="page-header__meta">
+                        <li class="date">Sep 17, 2024</li>
+                        <li class="author">
+                            By <span>Sourabh Joshi</span>
+                        </li>
+                    </ul>
+
+                </article>
+            </div>
+        </div>
+
+        <div class="row blog-content">
+            <div class="col-full blog-content__main">
+
+                <p class="lead">
+                    This article explores Great Expectations, an open-source data validation framework, and demonstrates how to use it to ensure data quality.
+                </p>
+
+                <h1>What is Great Expectations?</h1>
+                <p>Great Expectations is an open-source tool for data testing, documentation, and profiling. It helps data teams eliminate pipeline debt by asserting data expectations and catching errors early in the data flow.</p>
+
+                <h2>Key Features</h2>
+                <ul>
+                    <li><strong>Data Profiling:</strong> Automatically generate expectations based on data samples.</li>
+                    <li><strong>Validation:</strong> Test data against expectations and generate reports.</li>
+                    <li><strong>Data Documentation:</strong> Create data dictionaries and documentation as code.</li>
+                    <li><strong>Integration:</strong> Supports pandas, Spark, SQL databases, and more.</li>
+                </ul>
+
+                <h2>Getting Started with Great Expectations</h2>
+                <p>Install Great Expectations using pip:</p>
+                <pre><code class="language-bash">pip install great_expectations</code></pre>
+
+                <h2>Example: Validating a CSV File</h2>
+                <p>Let's validate a CSV file containing customer data.</p>
+
+                <h3>1. Initialize Great Expectations</h3>
+                <p>In your project directory, run:</p>
+                <pre><code class="language-bash">great_expectations init</code></pre>
+
+                <h3>2. Create an Expectation Suite</h3>
+                <p>Create a new expectation suite for your data:</p>
+                <pre><code class="language-bash">great_expectations suite new</code></pre>
+                <p>Select <strong>Filesystem</strong> and navigate to your CSV file.</p>
+
+                <h3>3. Define Expectations</h3>
+                <p>Using the Jupyter notebook that opens, define expectations:</p>
+                <pre><code class="language-python"># Expect column "age" to be between 0 and 120
+validator.expect_column_values_to_be_between("age", min_value=0, max_value=120)
+
+# Expect column "email" to match regex pattern
+validator.expect_column_values_to_match_regex("email", regex=r"[^@]+@[^@]+\.[^@]+")</code></pre>
+
+                <h3>4. Validate the Data</h3>
+                <p>Run a checkpoint to validate the data against the expectations:</p>
+                <pre><code class="language-bash">great_expectations checkpoint new my_checkpoint</code></pre>
+                <p>Configure the checkpoint and then run:</p>
+                <pre><code class="language-bash">great_expectations checkpoint run my_checkpoint</code></pre>
+
+                <img src="images/blog/great-expectations-report.png" alt="Great Expectations Validation Report" align="middle" width="1000" height="600">
+
+                <h2>Benefits of Using Great Expectations</h2>
+                <ul>
+                    <li><strong>Improved Data Quality:</strong> Catch data issues early in the pipeline.</li>
+                    <li><strong>Automated Documentation:</strong> Generate up-to-date data documentation.</li>
+                    <li><strong>Collaboration:</strong> Share data expectations and results with team members.</li>
+                    <li><strong>Integration:</strong> Easily integrates into existing data pipelines.</li>
+                </ul>
+
+                <p>Great Expectations empowers data teams to maintain high data quality standards and build trust in their data pipelines.</p>
+
+                <p style="font-family: 'Courier New', monospace;font-size: 50px;">LEARN, SHARE AND GROW</p>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row footer-bottom">
+
+            <div class="col-twelve">
+                <div class="copyright">
+                    <span>© Copyright Hola 2024</span>
+                    <span>Design by <a href="https://www.styleshout.com/">styleshout</a></span>
+                </div>
+
+                <div class="go-top">
+                    <a class="smoothscroll" title="Back to Top" href="#top"><i class="im im-arrow-up"
+                            aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+        </div> <!-- end footer-bottom -->
+
+    </footer> <!-- end footer -->
+
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
+
+    <!-- Java Script -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>
