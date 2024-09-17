@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <!-- Basic page needs -->
+    <meta charset="utf-8">
+    <title>Dagster - Introduction</title>
+    <meta name="description" content="dagster">
+    <meta name="author" content="Sourabh Joshi">
+    <!-- Mobile specific metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- Scripts -->
+    <script src="js/modernizr.js"></script>
+    <script src="js/pace.min.js"></script>
+</head>
+
+<body id="top">
+
+    <!-- Header -->
+    <header class="s-header">
+        <nav class="header-nav-wrap">
+            <ul class="header-nav">
+                <li class="current"><a href="index.html#home" title="home">Home</a></li>
+                <li><a href="index.html#about" title="about">AboutMe</a></li>
+                <li><a href="index.html#works" title="works">Works</a></li>
+                <li><a class="current" href="blog.html" title="blog">Blog-Moolaa</a></li>
+                <li><a href="index.html#contact" title="contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <a class="header-menu-toggle" href="#0"><span>Menu</span></a>
+
+    </header> <!-- end s-header -->
+
+    <article class="blog-single">
+
+        <!-- Page header/blog hero -->
+        <div class="page-header page-header--single page-hero" style="background-image:url(images/blog/dagster-header.jpeg)">
+
+            <div class="row page-header__content narrow">
+                <article class="col-full">
+                    <div class="page-header__info">
+                        <div class="page-header__cat">
+                            <a href="#0">Dagster</a>
+                        </div>
+                    </div>
+                    <h1 class="page-header__title">
+                        Dagster - An Orchestrator for Machine Learning, Analytics, and ETL
+                    </h1>
+                    <ul class="page-header__meta">
+                        <li class="date">Sep 17, 2024</li>
+                        <li class="author">
+                            By <span>Sourabh Joshi</span>
+                        </li>
+                    </ul>
+
+                </article>
+            </div>
+        </div>
+
+        <div class="row blog-content">
+            <div class="col-full blog-content__main">
+
+                <p class="lead">
+                    This article delves into Dagster, an open-source data orchestrator, and provides examples of how to use it to build and manage data pipelines.
+                </p>
+
+                <h1>What is Dagster?</h1>
+                <p>Dagster is an open-source data orchestrator designed to develop, deploy, and monitor data pipelines. It brings software engineering best practices to data engineering, making pipelines more testable, maintainable, and observable.</p>
+
+                <h2>Key Features</h2>
+                <ul>
+                    <li><strong>Declarative Pipeline Definitions:</strong> Define pipelines using Python code with clear dependencies.</li>
+                    <li><strong>Type Checking:</strong> Ensure data types are consistent across pipeline steps.</li>
+                    <li><strong>Modular Components:</strong> Reuse solids (functions) across different pipelines.</li>
+                    <li><strong>Observability:</strong> Built-in tools for logging, monitoring, and debugging.</li>
+                </ul>
+
+                <h2>Getting Started with Dagster</h2>
+                <p>Install Dagster and Dagit (Dagster's UI) using pip:</p>
+                <pre><code class="language-bash">pip install dagster dagit</code></pre>
+
+                <h2>Example: Creating a Simple Pipeline</h2>
+                <p>Let's create a simple pipeline that processes some data.</p>
+
+                <h3>1. Define Solids (Pipeline Steps)</h3>
+                <p>Solids are the building blocks of Dagster pipelines.</p>
+                <pre><code class="language-python">from dagster import solid, pipeline
+
+@solid
+def get_data(context):
+    return [1, 2, 3, 4, 5]
+
+@solid
+def process_data(context, data):
+    return [x * 2 for x in data]
+
+@solid
+def output_data(context, processed_data):
+    context.log.info(f"Processed Data: {processed_data}")</code></pre>
+
+                <h3>2. Define the Pipeline</h3>
+                <p>Connect the solids in a pipeline:</p>
+                <pre><code class="language-python">@pipeline
+def simple_pipeline():
+    data = get_data()
+    processed = process_data(data)
+    output_data(processed)</code></pre>
+
+                <h3>3. Run the Pipeline</h3>
+                <p>Execute the pipeline using Dagit or from the command line:</p>
+                <pre><code class="language-bash">dagit -f path/to/your_pipeline.py</code></pre>
+                <p>Access Dagit at <a href="http://localhost:3000" target="_blank">http://localhost:3000</a> to run and monitor your pipeline.</p>
+
+                <img src="images/blog/dagster-pipeline.png" alt="Dagster Pipeline Visualization" align="middle" width="1000" height="600">
+
+                <h2>Benefits of Using Dagster</h2>
+                <ul>
+                    <li><strong>Improved Code Quality:</strong> Encourages modular and testable code.</li>
+                    <li><strong>Enhanced Observability:</strong> Easy to monitor and debug pipelines.</li>
+                    <li><strong>Flexibility:</strong> Supports different execution environments and integrates with other tools.</li>
+                    <li><strong>Community Support:</strong> Active community contributing to its growth.</li>
+                </ul>
+
+                <p>Dagster bridges the gap between data engineering and software engineering, making your data pipelines more robust and maintainable.</p>
+
+                <p style="font-family: 'Courier New', monospace;font-size: 50px;">LEARN, SHARE AND GROW</p>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row footer-bottom">
+
+            <div class="col-twelve">
+                <div class="copyright">
+                    <span>© Copyright Hola 2024</span>
+                    <span>Design by <a href="https://www.styleshout.com/">styleshout</a></span>
+                </div>
+
+                <div class="go-top">
+                    <a class="smoothscroll" title="Back to Top" href="#top"><i class="im im-arrow-up"
+                            aria-hidden="true"></i></a>
+                </div>
+            </div>
+
+        </div> <!-- end footer-bottom -->
+
+    </footer> <!-- end footer -->
+
+    <div id="preloader">
+        <div id="loader"></div>
+    </div>
+
+    <!-- Java Script -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>
